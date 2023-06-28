@@ -1,0 +1,87 @@
+version: "3.7"
+# hidden comment
+services:
+  db:
+    container_name: postgres_container_demo
+    image: postgres:13
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - "5432:5432"
+    networks:
+      - flask_network_demo
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=zh2311
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+      container_name: pgadmin4_container_dm
+      image: dpage/pgadmin4
+      restart: always
+      environment:
+        PGADMIN_DEFAULT_EMAIL: zhenya13@admin.com
+        PGADMIN_DEFAULT_PASSWORD: zhenya13
+      ports:
+        - "5050:80"
+      networks:
+        - flask_network_demo
+
+  web:
+    build: project
+    container_name: web_container_demo
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - flask_network_demo
+
+
+
+  proxy:
+    build: proxy_demo
+    container_name: proxy_demo_container
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
+    volumes:
+      - ./certs:/etc/nginx/certs
+    networks:
+      - flask_network_demo
+
+#  cron:
+#    build: cron
+#    container_name: cron
+#    restart: always
+#    logging:
+#      options:
+#        max-size: "10m"
+#        max-file: "3"
+#    depends_on:
+#      - web
+#    networks:
+#      - flask_network
+
+networks:
+  flask_network_demo:
+
+volumes:
+  postgres_data:

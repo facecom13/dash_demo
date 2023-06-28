@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <title>Document</title>
+
+</head>
+<body>
+    <div class="container">
+        <div style="width: 50%; margin-top: 50px">
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="notification is-danger">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <h4>Авторизация</h4>
+            <form method="POST"  action="{{ url_for('home.login_post')}}">
+                {{ form.csrf_token }}
+                 <div class="form-group">
+                        {{ form.email_form.label }}
+                        {{ form.email_form (class ='form-control', type="text", id='email_form')}}
+                    <br>
+                          {% for error in form.email_form.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                          {% endfor %}
+                 </div>
+
+                <div class="form-group">
+                        {{ form.password_form.label }}
+                        {{ form.password_form (class ='form-control', type="text", id='password_form')}}
+                    <br>
+                          {% for error in form.password_form.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                          {% endfor %}
+                 </div>
+
+
+                <div class="form-check">
+                        {{ form.remember.label (class="form-check-label")}}
+                        {{ form.remember (class="form-check-input passwrd")}}
+                    <br>
+                          {% for error in form.remember.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                          {% endfor %}
+                 </div>
+
+                <div class="form-group" style="margin-top: 15px">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                 </div>
+
+
+
+            </form>
+        </div>
+
+
+    </div>
+
+
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function(){
+
+
+    })
+    </script>
+
+
+
+</body>
+</html>
