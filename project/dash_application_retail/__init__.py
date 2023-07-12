@@ -236,18 +236,18 @@ def create_dash_application_retail(flask_app):
                                                       #         active_tab_class_name="active_custom_tab_css",
                                                       #         disabled=True
                                                       #         ),
-                                                      dbc.Tab(settings_tab_content,
-                                                              label="Настройки",
-                                                              tab_class_name="custom_tab_css",
-                                                              label_class_name="custom_labelClassName",
-                                                              active_tab_class_name="active_custom_tab_css"
-                                                              ),
-                                                      dbc.Tab(settings_tab_content_2,
-                                                              label="Настройки",
-                                                              tab_class_name="custom_tab_css",
-                                                              label_class_name="custom_labelClassName",
-                                                              active_tab_class_name="active_custom_tab_css"
-                                                              )
+                                                      # dbc.Tab(settings_tab_content,
+                                                      #         label="Настройки",
+                                                      #         tab_class_name="custom_tab_css",
+                                                      #         label_class_name="custom_labelClassName",
+                                                      #         active_tab_class_name="active_custom_tab_css"
+                                                      #         ),
+                                                      # dbc.Tab(settings_tab_content_2,
+                                                      #         label="Настройки",
+                                                      #         tab_class_name="custom_tab_css",
+                                                      #         label_class_name="custom_labelClassName",
+                                                      #         active_tab_class_name="active_custom_tab_css"
+                                                      #         )
 
                                                   ]),
 
